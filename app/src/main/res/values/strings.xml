@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Convertor</string>
+    <string name="editText_Hint">Convert-Value</string>
+    <string name="button_Convert">Convert</string>
+    <!-- The choices for spinner is pre-determined that's why we have used string-array -->
+    <string-array name="ConvertType">
+        <item>Hexadecimal</item>
+        <item>Octal</item>
+        <item>Decimal</item>
+        <item>Binary</item>
+    </string-array>
+</resources>
