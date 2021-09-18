@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Convertor</string>
     <string name="editText_Hint">Convert-Value</string>
+    <string name="textView_Hint">Converted-Value</string>
     <string name="button_Convert">Convert</string>
+    <string name="FractionValue">Fraction-Value</string>
     <!-- The choices for spinner is pre-determined that's why we have used string-array -->
     <string-array name="ConvertType">
         <item>Hexadecimal</item>

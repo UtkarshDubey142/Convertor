@@ -3,10 +3,12 @@ package com.utkarsh.convertor;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     String inputType;
     String outputType;
     public String userInput;
+    // variable for output textView -->
+    TextView outputFiled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +28,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Targeting the output textView -->
-        TextView outputFiled = (TextView) findViewById(R.id.output_TextView);
+         outputFiled = (TextView) findViewById(R.id.output_TextView);
 
         // Targeting the output textView -->
         TextView inputFiled = (TextView) findViewById(R.id.userInput_Text);
-        //userInput = inputFiled.getText().toString();
 
         // Targeting spinner -->
         Spinner spinner = (Spinner) findViewById(R.id.dropDownSpinner);
@@ -46,13 +49,14 @@ public class MainActivity extends AppCompatActivity {
         // Object of IsValid Class -->
         IsValid validIs = new IsValid();
 
+        // Object of Fraction Class -->
+        Fraction classF = new Fraction();
+
 
         // Taking the value selected from Spinner One (User Input-Type) -->
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Object item = parent.getItemAtPosition(position);
-                //Log.i("selected" , item.toString());
                 inputType = adapter.getItem(position).toString();
             }
             @Override
@@ -65,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 outputType = adapter.getItem(position).toString();
-                outputFiled.setText(outputType);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -80,37 +83,64 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userInput = inputFiled.getText().toString().toUpperCase();
-                switch (inputType)
+
+                // getting Checkbox status -->
+                boolean checkboxStatus  = ((CheckBox)findViewById(R.id.Fraction_Checkbox)).isChecked();
+
+                if (checkboxStatus)
                 {
-                    case "Hexadecimal":
-                        showToast("Hexadecimal");
-                        validIs.isHexadecimal(userInput , outputType);
-                    break;
-                    case "Decimal":
-                        showToast("Decimal");
-                        validIs.isDecimal(userInput , outputType);
-                    break;
-                    case "Octal":
-                        showToast("Octal");
-                        validIs.isOctal(userInput , outputType);
-                    break;
-                    case "Binary":
-                        showToast("Binary");
-                        validIs.isBinary(userInput , outputType);
-                    break;
-                    default :
-                        showToast(inputType);
-                        validIs.isHexadecimal(userInput , outputType);
-                    break;
+                    switch (inputType)
+                    {
+                        case "Hexadecimal":
+                            classF.hexaFraction(userInput , outputType);
+                            break;
+                        case "Decimal":
+                            classF.decimalFraction(userInput , outputType);
+                            break;
+                        case "Octal":
+                            classF.octalFraction(userInput , outputType);
+                            break;
+                        case "Binary":
+                            classF.binaryFraction(userInput , outputType);
+                            break;
+                    }
+                    // @Override getResult() gives "Converted-Value"
+                    setResult(classF.getResult());
+                }
+                else
+                {
+                    switch (inputType)
+                    {
+                        case "Hexadecimal":
+                            validIs.isHexadecimal(userInput , outputType);
+                            break;
+                        case "Decimal":
+                            validIs.isDecimal(userInput , outputType);
+                            break;
+                        case "Octal":
+                            validIs.isOctal(userInput , outputType);
+                            break;
+                        case "Binary":
+                            validIs.isBinary(userInput , outputType);
+                            break;
+                    }
+                    // getResult() gives "Converted-Value"
+                    setResult(validIs.getResult());
                 }
             }
         });
-
     }
 
-    // Function for Toast message connected with switch -->
-    public void showToast (String msg)
+    // Sets the "Converted-Value" at TextView -->
+    public void setResult(String result)
     {
-        Toast.makeText(this , msg , Toast.LENGTH_SHORT).show();
+        if(outputFiled != null)
+        {
+            outputFiled.setText(result);
+        }
+        else
+        {
+            Log.d("MainActivity", "showMessage: NULL");
+        }
     }
 }

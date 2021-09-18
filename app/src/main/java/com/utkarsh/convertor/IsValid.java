@@ -8,7 +8,13 @@ public class IsValid extends MainActivity{
     int inputStringLength;
     String resultString = "";
 
-    // Functions for Checking Valid Input -->
+
+    // For Final-Result (Converted Value)
+    public String getResult()
+    {
+        return resultString;
+    }
+
     // Function 01 -->
     public void isHexadecimal (String hexaInput , String resultType)
     {
@@ -17,6 +23,7 @@ public class IsValid extends MainActivity{
             return;
         }
 
+        resultString = "";
         switch (resultType)
         {
             case "Decimal":
@@ -46,9 +53,10 @@ public class IsValid extends MainActivity{
                     }
                 }
                 break;
+            default:
+                return;
         }
-        Log.i("isHexadecimal" , resultString + " " + resultType);
-        resultString = "";
+        //Log.i("isHexadecimal" , resultString);
     }
 
     // Function 02 -->
@@ -59,6 +67,7 @@ public class IsValid extends MainActivity{
             return;
         }
 
+        resultString = "";
         switch (resultType)
         {
             case "Decimal":
@@ -73,9 +82,10 @@ public class IsValid extends MainActivity{
             case "Binary":
                 resultString = octalToBinary( "Octal" , octalInput);
                 break;
+            default:
+                return;
         }
-        Log.i("isOctal" ,  resultString);
-        resultString = "";
+        //Log.i("isOctal" ,  resultString);
     }
 
     // Function 03 -->
@@ -85,8 +95,9 @@ public class IsValid extends MainActivity{
         {
             return;
         }
-        inputStringLength = binaryInput.length();
 
+        inputStringLength = binaryInput.length();
+        resultString = "";
         switch (resultType)
         {
             case "Hexadecimal":
@@ -100,9 +111,10 @@ public class IsValid extends MainActivity{
             case "Decimal":
                 resultString = toDecimal(binaryInput);
                 break;
+            default:
+                return;
         }
-        Log.i("isBinary" , resultString);
-        resultString = "";
+        //Log.i("isBinary" , resultString);
     }
 
     // Function 04 -->
@@ -113,6 +125,7 @@ public class IsValid extends MainActivity{
             return;
         }
 
+        resultString = "";
         switch (resultType)
         {
             case "Hexadecimal":
@@ -128,9 +141,10 @@ public class IsValid extends MainActivity{
             case "Binary":
                 resultString = decimalToBinary(decimalInput);
                 break;
+            default:
+                return;
         }
-        Log.i("isDecimal" , resultString);
-        resultString = "";
+        //Log.i("isDecimal" , resultString);
     }
 
     // Additional Function for adding zeros -->
@@ -280,7 +294,9 @@ public class IsValid extends MainActivity{
                 i = i + 1;
             }
         }
-        return resultString;
+        inputString = resultString;
+        resultString = "";
+        return inputString;
     }
 
     // Function Converts Octal value into Binary
@@ -363,7 +379,9 @@ public class IsValid extends MainActivity{
                 i = i + 1;
             }
         }
-        return resultString;
+        inputString = resultString;
+        resultString = "";
+        return inputString;
     }
 
     // Function converts Binary to Octal, Hexadecimal -->
@@ -537,6 +555,7 @@ public class IsValid extends MainActivity{
         return  convertedValue;
     }
 
+    // Function converts Decimal Value --> Binary value
     public String decimalToBinary (String inputString)
     {
         int temp  = 0;
