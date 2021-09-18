@@ -351,24 +351,4 @@ public class Fraction extends IsValid{
 
         return  fractionMutilResult;
     }
-
-    /*
-    // Multiply the values after Decimal (.432)
-    public String fractionMultiplication (float afterDecimalValue , int multiplyTypeValue , String multiplyType)
-    {
-        String fractionMutilResult = ".0";
-        for (byte i = 0 ; i < 3 ; i++)
-        {
-            afterDecimalValue = afterDecimalValue * multiplyTypeValue;
-            fractionMutilResult = fractionMutilResult + valueBeforeDecimal(String.valueOf(afterDecimalValue));
-            afterDecimalValue = valueAfterDecimal(String.valueOf(afterDecimalValue));
-        }
-        Log.i("fractionMultiplication" , fractionMutilResult);
-        return  fractionMutilResult;
-    }
-
-        -- >> fractionMultiplication() << --
-        Above function >> fractionMultiplication() is getting the result of actual and final after
-        multiplying the values after Decimal (.432)
-     */
 }
